@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+
+{% block title %} {{pet.name}} {% endblock %}
+
+
+{% block content %}
+
+<div class="row mt-5 mb-5">
+    <div class="col-3">
+        <img class="img-thumbnail" style="height: 200px; width: 300px;" src="{{pet.photo_url}}" alt="{{pet.name}}">
+    </div>
+
+    <div class="col">
+        <h1>{{pet.name}}</h1>
+        <p><b>Species:</b> {{pet.species}}</p>
+        <p><b>Age:</b> {{pet.age}}</p>
+        <p><b>Notes:</b> {{pet.notes}}</p>
+
+        {% if pet.available%}
+            <p class="fw-bold text-success">Available</p>
+
+        {% else %}
+            <p class="fw-bold text-danger">Not Available</p>
+
+        {% endif %}
+
+    </div>
+</div>
+
+<h2>Edit {{pet.name}}'s Details</h2>
+
+<div class="row">
+    <form action="" method="POST">
+        {{ form.hidden_tag() }}
+
+        {% for field in form
+        if field.widget.input_type != 'hidden' %}
+
+        <p>
+            {{ field.label (class="fw-bold") }}
+            {{ field (autocomplete="off")}}
+            {% for err in field.errors %}
+            <small class="form-text text-danger">
+                {{err}}
+            </small>
+            {% endfor%}
+        </p>
+
+        {% endfor %}
+
+        <button class="btn btn-success">Submit Edit</button>
+        <a href="/" class="btn btn-outline-primary">Back to Home</a>
+    </form>
+
+    <form action="/{{ pet.id }}/delete" method="POST">
+        <button class="btn btn-danger btn-sm mt-5">Delete</button>
+    </form>
+
+</div>
+
+
+{% endblock %}
