@@ -14,7 +14,7 @@
 <div class="row text-center">
     {% for pet in pets %}
         <div class="col-4">
-            <img class="img-thumbnail" style="height: 200px; width: 300px;"src="{{pet.photo_url}}" alt="{{pet.name}}">
+            <img class="img-thumbnail" style="height: 200px; width: 300px;"src="{{pet.image_url()}}" alt="{{pet.name}}">
             
             {% if pet.available %}
             <p class="fs-5 fw-bold"><a style="text-decoration: none;" href="/{{pet.id}}">{{pet.name}}</a> is available!</p>
